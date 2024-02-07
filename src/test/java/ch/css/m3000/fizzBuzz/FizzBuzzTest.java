@@ -31,6 +31,16 @@ public class FizzBuzzTest {
                 .isThrownBy(() -> fizzBuzz(0));
     }
 
+    @Test
+    void fizzBuzzWhenInputIs3ThenReturnFizz() {
+        int input = 3;
+
+        String actual = fizzBuzz(input);
+
+        String expected = "1, 2, fizz";
+        assertThat(actual).isEqualTo(expected);
+    }
+
     private String fizzBuzz(int input) {
         if (input < 1) {
             throw new IllegalArgumentException("Only numbers > 1 are allowed. Your Input was %d".formatted(input));
@@ -38,7 +48,11 @@ public class FizzBuzzTest {
         StringBuilder result = new StringBuilder();
 
         for (int i = 1; i <= input; i++) {
-            result.append("%d, ".formatted(i));
+            if (i % 3 == 0) {
+                result.append("fizz, ");
+            } else {
+                result.append("%d, ".formatted(i));
+            }
         }
         result.delete(result.length() - 2, result.length());
 
